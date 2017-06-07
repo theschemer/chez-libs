@@ -88,7 +88,7 @@
     ;; Common type checker
     (define (%check-ideque x)
       (unless (ideque? x)
-        (error "ideque expected, but got:" x)))
+        (error '%check-ideque "ideque expected, but got:" x)))
 
     ;;;
     ;;; Constructors
@@ -157,7 +157,7 @@
       (%check-ideque dq)
       (if (zero? (dq-lenf dq))
         (if (zero? (dq-lenr dq))
-          (error "Empty deque:" dq)
+          (error 'ideque-front "Empty deque:" dq)
           (car (dq-r dq)))
         (car (dq-f dq))))
 
@@ -166,7 +166,7 @@
       (%check-ideque dq)
       (if (zero? (dq-lenf dq))
         (if (zero? (dq-lenr dq))
-          (error "Empty deque:" dq)
+          (error 'ideque-remove-front "Empty deque:" dq)
           *empty*)
         (check (- (dq-lenf dq) 1) (cdr (dq-f dq)) (dq-lenr dq) (dq-r dq))))
 
@@ -180,7 +180,7 @@
       (%check-ideque dq)
       (if (zero? (dq-lenr dq))
         (if (zero? (dq-lenf dq))
-          (error "Empty deque:" dq)
+          (error 'ideque-back "Empty deque:" dq)
           (car (dq-f dq)))
         (car (dq-r dq))))
 
@@ -189,7 +189,7 @@
       (%check-ideque dq)
       (if (zero? (dq-lenr dq))
         (if (zero? (dq-lenf dq))
-          (error "Empty deque:" dq)
+          (error 'ideque-remove-back "Empty deque:" dq)
           *empty*)
         (check (dq-lenf dq) (dq-f dq) (- (dq-lenr dq) 1) (cdr (dq-r dq)))))
 
@@ -240,7 +240,7 @@
     (define (ideque-ref dq n)
       (%check-ideque dq)
       (let ((len (+ (dq-lenf dq) (dq-lenr dq))))
-        (cond ((or (< n 0) (>= n len)) (error "Index out of range:" n))
+        (cond ((or (< n 0) (>= n len)) (error 'ideque-ref "Index out of range:" n))
               ((< n (dq-lenf dq)) (list-ref (dq-f dq) n))
               (else (list-ref (dq-r dq) (- len n 1))))))
 
@@ -263,8 +263,8 @@
             (check 0 '() lenr. (take r lenr.))))))
 
     (define (%check-length dq n)
-      (unless (<= 0 n (- (ideque-length dq) 1))
-        (error "argument is out of range:" n)))
+      (unless (<= 0 n (ideque-length dq))
+        (error '%check-length "argument is out of range:" n)))
 
     ;; API
     (define (ideque-take dq n)

@@ -36,8 +36,7 @@
           truncate/ truncate-quotient truncate-remainder
           round/ round-quotient round-remainder
           euclidean/ euclidean-quotient euclidean-remainder
-          balanced/ balanced-quotient balanced-remainder
-          ceiling/ ceiling-quotient ceiling-remainder)
+          balanced/ balanced-quotient balanced-remainder)
   (import (rnrs base)
           (only (rnrs r5rs) quotient remainder)
           (srfi :8 receive))
