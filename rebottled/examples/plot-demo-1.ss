@@ -3,7 +3,7 @@
 (import (except (rnrs) fold-right for-each map remove)
         (rebottled pstk)
         (rebottled pstk-plotchart)
-        (scheme list)
+        (srfi :1 lists)
         (only (chezscheme) random))
 
 (define (random-real) (random 1.0))

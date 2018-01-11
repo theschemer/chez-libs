@@ -1,7 +1,6 @@
-for dir in *-tests; do
-  for file in $dir/*-test.ss
-  do
-    scheme --script $file
-  done
+for file in rebottled/examples/*
+do
+  scheme --script $file
 done
+
 
